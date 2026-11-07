@@ -5846,6 +5846,17 @@ zwReaderStage.addEventListener('wheel', e => {
     zoomBy(e.deltaY < 0 ? 2 : -2);
   }
 }, {passive: false});
+
+// 手机端触摸优化：触摸按钮立即触发，避免click延迟
+document.querySelectorAll('.subject-btn').forEach(btn => {
+  btn.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    const onclick = this.getAttribute('onclick');
+    if (onclick) {
+      eval(onclick);
+    }
+  }, {passive: false});
+});
 </script>
 </body>
 </html>
